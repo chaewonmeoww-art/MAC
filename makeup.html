@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M·A·C | 메이크업</title>
+<style>
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-1Thin.woff2') format('woff2');font-weight:100;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-2ExtraLight.woff2') format('woff2');font-weight:200;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-3Light.woff2') format('woff2');font-weight:300;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');font-weight:900;font-display:swap;}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Presentation',sans-serif;color:#111;background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;border:none;}
+.wrap{margin:0 auto;padding:0 260px;}
+
+/* ===== HEADER ===== */
+header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #eee;}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;margin:0 auto;padding:0 260px;}
+.logo{display:inline-flex;align-items:center;}
+.logo img{height:26px;width:auto;object-fit:contain;}
+.nav ul{display:flex;gap:52px;list-style:none;font-size:20px;font-weight:600;}
+.nav ul a:hover{opacity:.6;}
+.nav ul a.on{border-bottom:2px solid #111;padding-bottom:4px;}
+.nav-icons{display:flex;gap:18px;align-items:center;}
+.nav-icons img{width:22px;height:22px;object-fit:contain;}
+
+/* ===== HERO ===== */
+.mk-hero{position:relative;line-height:0;}
+.mk-hero>img{width:100%;height:auto;}
+.mk-pick{position:absolute;bottom:9%;color:#fff;line-height:1.4;}
+.mk-pick.left{left:9%;}
+.mk-pick.right{right:9%;text-align:right;}
+.mk-pick .who{font-size:15px;font-weight:400;letter-spacing:.5px;}
+.mk-pick .pk-name{font-size:22px;font-weight:600;margin:6px 0 14px;}
+.mk-pick .pk-btn{background:#111;color:#fff;font-size:13px;font-weight:400;padding:9px 18px;border-radius:20px;}
+
+/* ===== CATEGORY TABS ===== */
+.mk-cats{background:#111;}
+.mk-cats ul{display:flex;justify-content:center;align-items:center;gap:56px;height:66px;list-style:none;}
+.mk-cats a{color:#fff;font-size:16px;font-weight:400;opacity:.75;padding:6px 0;}
+.mk-cats a:hover{opacity:1;}
+.mk-cats a.on{opacity:1;font-weight:600;border-bottom:2px solid #fff;}
+
+/* ===== SEARCH ===== */
+.mk-search{display:flex;align-items:center;justify-content:center;gap:12px;margin:56px 0 44px;}
+.mk-search .box{display:flex;align-items:center;gap:12px;border:1px solid #dcdcdc;border-radius:28px;padding:13px 22px;width:440px;}
+.mk-search .box img{width:18px;height:18px;opacity:.55;}
+.mk-search .box input{border:none;outline:none;flex:1;font-size:15px;font-weight:300;color:#666;background:transparent;}
+.mk-search .filter{border:1px solid #dcdcdc;border-radius:12px;padding:13px;display:flex;align-items:center;justify-content:center;}
+.mk-search .filter img{width:20px;height:20px;}
+
+/* ===== PRODUCT GRID ===== */
+.mk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;}
+.pcard{position:relative;border:1px solid #ececec;border-radius:14px;padding:34px 22px 26px;background:#fff;text-align:center;display:flex;flex-direction:column;}
+.pcard .newtag{position:absolute;top:18px;right:18px;font-size:12px;font-weight:600;letter-spacing:1px;padding:4px 12px;border:1px solid #111;border-radius:20px;}
+.pcard .pimg{height:190px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.pcard .pimg img{max-width:160px;max-height:190px;width:auto;object-fit:contain;}
+.pcard .pname{font-size:18px;font-weight:600;color:#111;margin-bottom:8px;line-height:1.35;min-height:48px;}
+.pcard .pen{font-size:13px;font-weight:400;color:#9a9a9a;margin-bottom:12px;line-height:1.4;min-height:36px;}
+.pcard .pprice{font-size:16px;font-weight:600;color:#111;margin-bottom:14px;}
+.pcard .psw{display:flex;gap:5px;justify-content:center;margin-bottom:10px;}
+.pcard .psw i{width:22px;height:22px;border-radius:50%;display:block;flex:0 0 auto;}
+.pcard .psw i.sel{position:relative;}
+.pcard .psw i.sel::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#fff;}
+.pcard .pshade{font-size:14px;font-weight:400;color:#8b8b8b;margin-bottom:18px;}
+.pcard .pbtns{display:flex;gap:8px;margin-top:auto;}
+.pcard .pbtns button{flex:1;font-size:13px;font-weight:500;padding:11px 0;border-radius:22px;}
+.pcard .b-fill{background:#111;color:#fff;}
+.pcard .b-out{background:#fff;border:1px solid #111;color:#111;}
+
+/* ===== PAGINATION ===== */
+.mk-page{display:flex;justify-content:center;gap:10px;margin:56px 0 0;}
+.mk-page a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #e2e2e2;border-radius:8px;font-size:15px;font-weight:400;color:#666;}
+.mk-page a.on{background:#111;color:#fff;border-color:#111;}
+
+/* ===== MAXIMAL BANNER ===== */
+.mk-maximal{background:#0c0c0c;color:#fff;margin-top:120px;overflow:hidden;}
+.mk-maximal .inner{display:flex;align-items:center;gap:40px;}
+.mk-maximal .mx-text{flex:1;padding:70px 0;}
+.mk-maximal .mx-text .tag{font-size:15px;font-weight:400;letter-spacing:1px;color:#cfcfcf;margin-bottom:18px;}
+.mk-maximal .mx-text h3{font-size:38px;font-weight:600;margin-bottom:20px;}
+.mk-maximal .mx-text p{font-size:17px;font-weight:300;color:#d5d5d5;line-height:1.7;margin-bottom:28px;}
+.mk-maximal .mx-text .mx-btn{background:#fff;color:#111;font-size:16px;font-weight:500;padding:13px 30px;}
+.mk-maximal .mx-img{flex:0 0 46%;width:46%;align-self:stretch;object-fit:cover;}
+
+/* ===== SIGNATURE ===== */
+.mk-sig{margin-top:110px;}
+.mk-sig h2{font-size:32px;font-weight:600;margin-bottom:40px;}
+.mk-sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+.sig-card img{width:100%;height:230px;object-fit:cover;border-radius:4px;margin-bottom:20px;}
+.sig-card h4{font-size:22px;font-weight:600;margin-bottom:12px;}
+.sig-card p{font-size:15px;font-weight:300;color:#777;line-height:1.6;margin-bottom:20px;min-height:66px;}
+.sig-card .sig-btn{background:#111;color:#fff;font-size:14px;font-weight:400;padding:11px 22px;display:inline-flex;align-items:center;gap:8px;}
+
+/* ===== FOOTER ===== */
+footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:120px;}
+.foot-top{display:flex;justify-content:space-between;gap:40px;margin-bottom:80px;}
+.fcol h5{color:#fff;font-size:18px;font-weight:600;margin-bottom:28px;}
+.fcol h5.uline{display:inline-block;padding-bottom:10px;border-bottom:1px solid #fff;margin-bottom:0;}
+.fcol ul{list-style:none;font-size:16px;font-weight:300;line-height:2.6;color:#cfcfcf;}
+.fcol ul li a:hover{color:#fff;}
+.fcol ul li.b{font-weight:600;color:#fff;}
+.legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:44px;font-size:15px;font-weight:300;color:#cfcfcf;margin-bottom:28px;}
+.legal-links .b{font-weight:600;color:#fff;}
+.foot-legal p{font-size:16px;font-weight:300;color:#dcdcdc;line-height:1.6;margin-bottom:18px;}
+
+@media(max-width:1280px){
+  .wrap,.nav{padding-left:80px;padding-right:80px;}
+}
+@media(max-width:900px){
+  .nav ul{display:none;}
+  .wrap,.nav{padding-left:24px;padding-right:24px;}
+  .mk-grid{grid-template-columns:repeat(2,1fr);}
+  .mk-maximal .inner,.mk-sig-grid{flex-direction:column;grid-template-columns:1fr;}
+  .mk-maximal .mx-img{width:100%;}
+  .mk-cats ul{gap:24px;overflow-x:auto;justify-content:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html"><img src="images/mac_logo.png" alt="M·A·C"></a>
+    <ul>
+      <li><a href="#">공식몰 단독</a></li>
+      <li><a href="#">신제품</a></li>
+      <li><a href="#">베스트</a></li>
+      <li><a class="on" href="makeup.html">메이크업</a></li>
+      <li><a href="#">스킨케어</a></li>
+      <li><a href="#">M.A.C.Zine</a></li>
+    </ul>
+    <div class="nav-icons">
+      <img src="images/login.png" alt="login">
+      <img src="images/shopping basket.png" alt="cart">
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="mk-hero">
+  <img src="images/sub_main.png" alt="POWDER KISS">
+  <div class="mk-pick left">
+    <div class="who">ELLA의 원픽</div>
+    <div class="pk-name">파우더 키스 헤이즈 매트 립스틱</div>
+    <button class="pk-btn">24가지 쉐이드 쇼핑하기</button>
+  </div>
+  <div class="mk-pick right">
+    <div class="who">DOJA CAT의 원픽</div>
+    <div class="pk-name">파우더 키스 립 + 치크 무스</div>
+    <button class="pk-btn">28가지 쉐이드 쇼핑하기</button>
+  </div>
+</section>
+
+<!-- CATEGORY TABS -->
+<nav class="mk-cats">
+  <ul>
+    <li><a class="on" href="#">LIPSTICK</a></li>
+    <li><a href="#">LIQUID LIP</a></li>
+    <li><a href="#">LIPGLASS</a></li>
+    <li><a href="#">LIP PENCIL</a></li>
+    <li><a href="#">Mini M·A·C</a></li>
+    <li><a href="#">Lip Palette &amp; Kit</a></li>
+    <li><a href="#">Lip Care &amp; Primer</a></li>
+  </ul>
+</nav>
+
+<!-- SEARCH -->
+<div class="wrap">
+  <div class="mk-search">
+    <div class="box">
+      <img src="images/sub_icon01.png" alt="search">
+      <input type="text" placeholder="찾으시는 제품을 검색하세요.">
+    </div>
+    <div class="filter"><img src="images/sub_icon02.png" alt="filter"></div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="mk-grid">
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item01.png" alt=""></div>
+      <div class="pname">파우더 키스 립 + 치크 무스</div>
+      <div class="pen">POWDER KISS LIP + CHEEK MOUSSE</div>
+      <div class="pprice">₩ 49,000</div>
+      <div class="psw"><i class="sel" style="background:#B03A5B"></i><i style="background:#C85C74"></i><i style="background:#A8324D"></i><i style="background:#8E2740"></i><i style="background:#D07688"></i><i style="background:#7A2038"></i><i style="background:#6A1B30"></i></div>
+      <div class="pshade">뷰티 리플</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item02.png" alt=""></div>
+      <div class="pname">파우더 키스 헤이즈 매트 립스틱</div>
+      <div class="pen">POWDER KISS HAZY MATTE LIPSTICK</div>
+      <div class="pprice">₩ 42,000</div>
+      <div class="psw"><i class="sel" style="background:#B4614E"></i><i style="background:#C9755F"></i><i style="background:#A34E3D"></i><i style="background:#D68A72"></i><i style="background:#8E3E30"></i><i style="background:#7A3327"></i><i style="background:#6A2C22"></i></div>
+      <div class="pshade">나이니</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item03.png" alt=""></div>
+      <div class="pname">맥시멀 실키 매트 립스틱</div>
+      <div class="pen">M·A·CXIMAL SILKY MATTE LIPSTICK</div>
+      <div class="pprice">₩ 39,000</div>
+      <div class="psw"><i class="sel" style="background:#B12F3A"></i><i style="background:#C74650"></i><i style="background:#9C2731"></i><i style="background:#D95F68"></i><i style="background:#851F29"></i><i style="background:#701823"></i><i style="background:#5E141D"></i></div>
+      <div class="pshade">킬 러버</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item04.png" alt=""></div>
+      <div class="pname">맥시멀 슬릭 새틴 립스틱 인 더 클리어</div>
+      <div class="pen">M·A·CXIMAL SLEEK SATIN LIPSTICK</div>
+      <div class="pprice">₩ 39,000</div>
+      <div class="psw"><i class="sel" style="background:#C97A62"></i><i style="background:#D98E74"></i><i style="background:#B96A52"></i><i style="background:#E6A186"></i><i style="background:#A15743"></i><i style="background:#8E4A38"></i><i style="background:#7A3E2E"></i></div>
+      <div class="pshade">인터 컬러</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item05.png" alt=""></div>
+      <div class="pname">맥시멀 실키 매트 립스틱</div>
+      <div class="pen">M·A·CXIMAL SILKY MATTE LIPSTICK</div>
+      <div class="pprice">₩ 39,000</div>
+      <div class="psw"><i class="sel" style="background:#9C3352"></i><i style="background:#B54968"></i><i style="background:#872A45"></i><i style="background:#C86380"></i><i style="background:#75213A"></i><i style="background:#631B30"></i><i style="background:#521628"></i></div>
+      <div class="pshade">무스드 라즈베리</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item06.png" alt=""></div>
+      <div class="pname">맥시멀 실키 매트 립스틱 / 비바 글램</div>
+      <div class="pen">M·A·CXIMAL SILKY MATTE VIVA GLAM LIPSTICK</div>
+      <div class="pprice">₩ 39,000</div>
+      <div class="psw"><i class="sel" style="background:#A62D38"></i><i style="background:#BE434E"></i><i style="background:#8E242E"></i><i style="background:#D25C66"></i><i style="background:#7A1E27"></i><i style="background:#66181F"></i><i style="background:#54141A"></i></div>
+      <div class="pshade">비바 글램 III</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item07.png" alt=""></div>
+      <div class="pname">프로스트 립스틱</div>
+      <div class="pen">FROST LIPSTICK</div>
+      <div class="pprice">₩ 38,000</div>
+      <div class="psw"><i class="sel" style="background:#D98B94"></i><i style="background:#E6A2A9"></i><i style="background:#C9757F"></i><i style="background:#F0B8BD"></i><i style="background:#B5606B"></i><i style="background:#A24E58"></i><i style="background:#8E3E48"></i></div>
+      <div class="pshade">어 파티 오브 원</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item08.png" alt=""></div>
+      <div class="pname">레트로 매트 립스틱</div>
+      <div class="pen">RETRO MATTE LIPSTICK</div>
+      <div class="pprice">₩ 38,000</div>
+      <div class="psw"><i class="sel" style="background:#A02231"></i><i style="background:#B83848"></i><i style="background:#881B29"></i><i style="background:#CC5260"></i><i style="background:#741622"></i><i style="background:#60121C"></i><i style="background:#4E0F17"></i></div>
+      <div class="pshade">러비드</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item09.png" alt=""></div>
+      <div class="pname">파우더 키스 벨벳 블러 슬림 스틱</div>
+      <div class="pen">POWDER KISS VELVET BLUR SLIM STICK</div>
+      <div class="pprice">₩ 49,000</div>
+      <div class="psw"><i class="sel" style="background:#9E4A44"></i><i style="background:#B85F58"></i><i style="background:#8A3B36"></i><i style="background:#CC756D"></i><i style="background:#75302C"></i><i style="background:#632825"></i><i style="background:#52201D"></i></div>
+      <div class="pshade">다이버시파이드</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item10.png" alt=""></div>
+      <div class="pname">블라썸 시프트 립 트리오</div>
+      <div class="pen">BLOSSOM SHIFT LIP TRIO</div>
+      <div class="pprice">₩ 85,000</div>
+      <div class="psw"><i class="sel" style="background:#C86E7E"></i><i style="background:#D98695"></i><i style="background:#B85668"></i></div>
+      <div class="pshade">베이비</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item11.png" alt=""></div>
+      <div class="pname">맥시멀 실키 매트 립스틱</div>
+      <div class="pen">M·A·CXIMAL SILKY MATTE LIPSTICK</div>
+      <div class="pprice">₩ 39,000</div>
+      <div class="psw"><i class="sel" style="background:#B12F3A"></i><i style="background:#C74650"></i><i style="background:#9C2731"></i><i style="background:#D95F68"></i><i style="background:#851F29"></i><i style="background:#701823"></i><i style="background:#5E141D"></i></div>
+      <div class="pshade">킬 러버</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg"><img src="images/sub_item12.png" alt=""></div>
+      <div class="pname">맥시멀 슬릭 새틴 립스틱 인 더 클리어</div>
+      <div class="pen">M·A·CXIMAL SLEEK SATIN LIPSTICK</div>
+      <div class="pprice">₩ 39,000</div>
+      <div class="psw"><i class="sel" style="background:#C97A62"></i><i style="background:#D98E74"></i><i style="background:#B96A52"></i><i style="background:#E6A186"></i><i style="background:#A15743"></i><i style="background:#8E4A38"></i><i style="background:#7A3E2E"></i></div>
+      <div class="pshade">인터 컬러</div>
+      <div class="pbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
+    </div>
+
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="mk-page">
+    <a class="on" href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+  </div>
+</div>
+
+<!-- MAXIMAL BANNER -->
+<section class="mk-maximal">
+  <div class="wrap">
+    <div class="inner">
+      <div class="mx-text">
+        <div class="tag">MORE COLOURS. MORE COMBOS.</div>
+        <h3>립 메이크업의 완성</h3>
+        <p>자연스러운 클린 라인 정리부터 오버립 표현까지!<br>NEW 컬러로 업그레이드된 립 펜슬 라인업을 만나보세요.</p>
+        <button class="mx-btn">구매하기</button>
+      </div>
+      <img class="mx-img" src="images/sub_banner.png" alt="NEW M·A·Cximal">
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE -->
+<section class="mk-sig">
+  <div class="wrap">
+    <h2>나만의 시그니처 립 체험</h2>
+    <div class="mk-sig-grid">
+      <div class="sig-card">
+        <img src="images/sub_section_img01.png" alt="">
+        <h4>집에서 립 쉐이드 체험하기</h4>
+        <p>200가지 이상의 립 컬러를 정리부터 비대면으로 비교 체험할 수 있는 버추얼 트라이 온 서비스.</p>
+        <button class="sig-btn">지금 체험하기 →</button>
+      </div>
+      <div class="sig-card">
+        <img src="images/sub_section_img02.png" alt="">
+        <h4>무료 립 서비스 즐기기</h4>
+        <p>나만의 립 메이크업을 아티스트가 추천하는 립 제품과 나만의 스타일로 완성할 수 있습니다.</p>
+        <button class="sig-btn">지금 예약하기 →</button>
+      </div>
+      <div class="sig-card">
+        <img src="images/sub_section_img03.png" alt="">
+        <h4>완벽한 립 콤보 찾기</h4>
+        <p>맥시멀 실키 매트 립스틱과 립 펜슬을 피부 톤에 맞춰 매치한 완벽한 립 콤보를 만나보세요.</p>
+        <button class="sig-btn">립 콤보 쇼핑하기 →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="fcol">
+        <h5>맥스토어</h5>
+        <ul><li><a href="#">매장안내</a></li></ul>
+      </div>
+      <div class="fcol">
+        <h5>고객지원</h5>
+        <ul>
+          <li><a href="#">라이브챗</a></li>
+          <li><a href="#">카카오 라이브챗</a></li>
+          <li><a href="#">CONTACT US</a></li>
+          <li class="b">전화문의 1644 - 3748</li>
+          <li><a href="#">FAQS</a></li>
+          <li><a href="#">배송정보</a></li>
+          <li><a href="#">반품 및 교환</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>고객지원</h5>
+        <ul>
+          <li><a href="#">OUR STORY</a></li>
+          <li><a href="#">맥 에이즈 펀드</a></li>
+          <li><a href="#">맥 프로 멤버십</a></li>
+          <li><a href="#">나의 맥 러버</a></li>
+          <li><a href="#">채용 정보</a></li>
+          <li><a href="#">ANIMAL TESTING</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>내 정보 및 주문관리</h5>
+        <ul>
+          <li><a href="#">내 정보 확인 및 수정</a></li>
+          <li><a href="#">주문 조회</a></li>
+          <li><a href="#">주문 내역 조회</a></li>
+          <li><a href="#">위시리스트</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5 class="uline">국가 변경</h5>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <div class="legal-links">
+        <a href="#">이용약관</a>
+        <a href="#" class="b">개인정보 처리방침</a>
+        <a href="#">COOKIE 관리</a>
+        <span>© MAKE-UP ART COSMETICS. ALL WORLDWIDE RIGHTS RESERVED.</span>
+      </div>
+      <p>이엘씨에이한국(유) 대표 JEAN ALEXANDRE HAVARD 서울시 강남구 강남대로 382 (역삼동) 메리츠타워, 06232</p>
+      <p>통신판매업신고번호: 강남-15737호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사업자정보조회&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;고객관리지원팀: 1644 - 3748</p>
+      <p>호스팅서비스 사업자: (주)엘지유플러스</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
