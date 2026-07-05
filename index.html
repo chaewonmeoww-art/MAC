@@ -17,18 +17,19 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Presentation',sans-serif;color:#111;background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;}
+body{font-family:'Presentation',sans-serif;color:#111;background:#ffffff;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;caret-color:transparent;}
+input,textarea{-webkit-user-select:text;user-select:text;caret-color:auto;}
 img{display:block;max-width:100%;}
 a{text-decoration:none;color:inherit;}
 button{font-family:inherit;cursor:pointer;border:none;}
-.wrap{margin:0 auto;padding:0 260px;}
+.wrap{max-width:1400px;margin:0 auto;padding:0 24px;}
 
 /* ===== HEADER ===== */
 header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #eee;}
-.nav{display:flex;align-items:center;justify-content:space-between;height:64px;margin:0 auto;padding:0 260px;}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1400px;margin:0 auto;padding:0 24px;}
 .logo{display:inline-flex;align-items:center;}
 .logo img{height:26px;width:auto;object-fit:contain;}
-.nav ul{display:flex;gap:52px;list-style:none;font-size:20px;font-weight:600;}
+.nav ul{display:flex;gap:52px;list-style:none;font-size:20px;font-weight:600;margin-left:50px;}
 .nav ul a:hover{opacity:.6;}
 .nav-icons{display:flex;gap:18px;align-items:center;}
 .nav-icons img{width:22px;height:22px;object-fit:contain;}
@@ -49,9 +50,10 @@ section{padding:0;}
 /* ===== INTRO / FEATURE ===== */
 .feature-sec{position:relative;}
 .feature-line{position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:auto;z-index:0;pointer-events:none;}
-.feature{display:flex;align-items:center;gap:80px;position:relative;z-index:1;margin:0 auto;padding:0 260px;}
-.feature .fimg{flex:0 0 684px;width:684px;height:546px;object-fit:cover;}
-.feature .ftext{flex:1;text-align:center;}
+.feature-line path{fill:none;stroke:#111;stroke-width:1;}
+.feature{display:flex;align-items:center;gap:80px;position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 40px;}
+.feature .fimg{flex:0 0 600px;width:600px;height:478px;object-fit:cover;position:relative;top:28px;left:42px;}
+.feature .ftext{flex:1;text-align:center;position:relative;top:28px;}
 .feature h2{font-size:48px;font-weight:600;color:#000000;margin-bottom:14px;}
 .feature .en{font-size:36px;font-weight:500;letter-spacing:1px;color:#8B8B8B;margin-bottom:30px;}
 .feature p{font-size:32px;font-weight:400;color:#000000;line-height:1.5;margin-bottom:34px;}
@@ -67,8 +69,10 @@ section{padding:0;}
 .best-head h2{font-size:36px;font-weight:600;margin:14px 0 6px;}
 .best-head .en{font-size:30px;font-weight:300;letter-spacing:2px;color:#000000;}
 .best-head .price{font-size:24px;font-weight:600;margin-top:16px;}
-.best-sec .wrap{max-width:none;}
+.best-sec .wrap{max-width:1400px;}
 .swatch-row{display:flex;justify-content:center;gap:169px;flex-wrap:nowrap;}
+.swatch-row.anim-ready .swatch{opacity:0;transform:translateY(48px);transition:opacity .9s ease,transform .9s ease;}
+.swatch-row.anim-ready.in .swatch{opacity:1;transform:translateY(0);}
 .swatch{text-align:center;width:145px;flex:0 0 auto;}
 .swatch .prod{margin-bottom:38px;display:flex;align-items:center;justify-content:center;}
 .swatch .prod img{width:145px;height:321px;object-fit:contain;}
@@ -96,9 +100,19 @@ section{padding:0;}
 /* ===== NEW carousel ===== */
 .carousel{position:relative;}
 .cards{display:flex;gap:30px;justify-content:center;}
+.cards-vp{overflow:hidden;width:100%;}
+.cards-track{display:flex;transition:transform .9s ease;}
+.cards-page{flex:0 0 100%;display:flex;gap:30px;justify-content:center;}
+.dots{display:flex;gap:12px;justify-content:center;margin-top:44px;}
+.dots .pdot{width:11px;height:11px;border-radius:50%;background:#d6d6d6;cursor:pointer;border:none;padding:0;transition:background .3s;}
+.dots .pdot.on{background:#111;}
+.cards-page{gap:20px;}
+.cards-page .card{flex:1 1 0;min-width:0;max-width:328px;width:auto;height:auto;min-height:560px;padding:44px 16px;}
+.cards-page .card .cimg img{width:100%;max-width:216px;height:auto;}
+.cards-page .card .chips{flex-wrap:wrap;}
 .new-title{text-align:center;font-weight:600;font-size:64px;color:#000;margin-bottom:16px;}
 .new-sub{text-align:center;font-weight:300;font-size:32px;color:#000;margin-bottom:56px;}
-.new-sec .wrap{max-width:none;}
+.new-sec .wrap{max-width:1400px;}
 .card{position:relative;flex:0 0 328px;width:328px;height:618px;border:1px solid #ececec;border-radius:14px;padding:62px 24px;background:#fff;text-align:center;display:flex;flex-direction:column;}
 .card .cimg{margin-bottom:5px;background:transparent;display:flex;align-items:center;justify-content:center;overflow:visible;}
 .card .cimg img{width:216px;height:225px;object-fit:contain;}
@@ -138,14 +152,16 @@ section{padding:0;}
 .section-title{text-align:center;font-weight:600;font-size:64px;color:#000;letter-spacing:1px;margin-bottom:0;}
 .nc-line{width:340px;height:2px;background:#E1E1E1;margin:20px auto 70px;position:relative;}
 .nc-line::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120px;height:2px;background:#111;}
-.crow{display:flex;align-items:center;gap:56px;margin-bottom:70px;}
-.crow .rimg{flex:0 0 44%;width:44%;height:320px;object-fit:cover;}
+.crow{display:flex;align-items:center;gap:48px;margin:0 0 90px auto;max-width:1250px;}
+.crow.ry{opacity:0;transform:translateY(-40px);transition:opacity .8s ease,transform .8s ease;}
+.crow.ry.in{opacity:1;transform:translateY(0);}
+.crow .rimg{flex:0 0 52%;width:52%;height:340px;object-fit:cover;}
 .crow .rtext{flex:1;}
-.crow .num{font-size:29px;color:#000;font-weight:400;margin-bottom:14px;padding-bottom:12px;position:relative;display:inline-block;}
+.crow .num{font-size:24px;color:#000;font-weight:400;margin-bottom:14px;padding-bottom:12px;position:relative;display:inline-block;}
 .crow .num::after{content:"";position:absolute;left:0;bottom:0;width:44px;height:1px;background:#E1E1E1;}
-.crow h3{font-size:40px;font-weight:600;color:#000;margin-bottom:16px;}
-.crow p{font-size:29px;font-weight:400;color:#555;line-height:1.5;margin-bottom:26px;}
-.nc-btn{background:#111;color:#fff;font-size:24px;font-weight:400;padding:10px 26px;border:none;}
+.crow h3{font-size:34px;font-weight:600;color:#000;margin-bottom:16px;}
+.crow p{font-size:24px;font-weight:400;color:#555;line-height:1.5;margin-bottom:26px;}
+.nc-btn{background:#111;color:#fff;font-size:20px;font-weight:400;padding:10px 26px;border:none;}
 .nc-btn:hover{background:#333;}
 
 /* ===== SHADE FINDER (dark) ===== */
@@ -154,8 +170,13 @@ section{padding:0;}
 .shade h2{text-align:center;font-size:64px;font-weight:600;color:#ffffff;margin-bottom:48px;}
 .ba{position:relative;display:flex;justify-content:center;align-items:flex-start;gap:30px;margin-bottom:20px;}
 .ba .col{display:flex;flex-direction:column;align-items:center;gap:18px;}
-.ba .face{width:476px;height:476px;border-radius:14px;overflow:hidden;}
+.ba .face{width:476px;height:476px;border-radius:14px;overflow:hidden;position:relative;}
 .ba .face img{width:100%;height:100%;object-fit:cover;}
+.ba .face .lyr{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,opacity;}
+.ba .face .nxt{opacity:0;}
+.ba .ctrl{cursor:pointer;}
+.ba{cursor:grab;}
+.ba:active{cursor:grabbing;}
 .ba .col-label{font-size:29px;font-weight:400;color:#ffffff;}
 .ba .ctrl{position:absolute;left:50%;top:238px;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:#000000;display:flex;align-items:center;justify-content:center;gap:10px;z-index:2;}
 .ba .ctrl i{width:9px;height:9px;border:solid #ffffff;border-width:3px 3px 0 0;display:block;}
@@ -164,6 +185,9 @@ section{padding:0;}
 .shade .cap{text-align:center;font-weight:600;font-size:40px;color:#ffffff;margin-top:40px;margin-bottom:12px;}
 .shade .desc{text-align:center;font-size:29px;font-weight:400;color:#ffffff;line-height:1.6;max-width:900px;margin:0 auto 28px;}
 .shade .cbtn{display:block;margin:0 auto;background:#ffffff;color:#000000;font-size:24px;font-weight:400;padding:13px 40px;border-radius:2px;}
+.shade-dots{display:flex;gap:14px;justify-content:center;margin-top:40px;}
+.shade-dots .sdot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer;border:none;padding:0;transition:background .3s,transform .3s;}
+.shade-dots .sdot.on{background:#fff;transform:scale(1.2);}
 
 /* ===== MARQUEE BANNER ===== */
 .marquee{overflow:hidden;line-height:0;}
@@ -180,7 +204,7 @@ section{padding:0;}
 .services .lead{font-size:36px;font-weight:300;color:#000;margin-bottom:54px;}
 .svc-body{display:flex;gap:64px;align-items:stretch;}
 .svc-img{flex:0 0 608px;width:608px;height:628px;border-radius:8px;object-fit:cover;}
-.svc-form{flex:1;border:1px solid #eee;border-radius:18px;padding:46px 42px;background:#fff;box-shadow:0 24px 60px rgba(60,20,120,.12);display:flex;flex-direction:column;justify-content:center;}
+.svc-form{flex:1;border:1px solid #eee;border-radius:18px;padding:46px 42px;background:#fff;box-shadow:0 20px 50px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:center;}
 .svc-steps{display:flex;align-items:flex-start;margin-bottom:78px;}
 .svc-step{position:relative;width:56px;flex:0 0 auto;}
 .svc-step .ic{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
@@ -202,7 +226,7 @@ section{padding:0;}
 /* ===== FOOTER ===== */
 footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
 .foot-top{display:flex;justify-content:space-between;gap:40px;margin-bottom:80px;}
-.fcol h5{color:#fff;font-size:18px;font-weight:600;margin-bottom:28px;}
+.fcol h5{color:#fff;font-size:18px;font-weight:600;margin-bottom:14px;}
 .fcol h5.uline{display:inline-block;padding-bottom:10px;border-bottom:1px solid #fff;margin-bottom:0;}
 .fcol ul{list-style:none;font-size:16px;font-weight:300;line-height:2.6;color:#cfcfcf;}
 .fcol ul li a:hover{color:#fff;}
@@ -239,7 +263,7 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
       <li><a href="#">M.A.C.Zine</a></li>
     </ul>
     <div class="nav-icons">
-      <img src="images/login.png" alt="login">
+      <a href="login.html"><img src="images/login.png" alt="login"></a>
       <img src="images/shopping basket.png" alt="cart">
     </div>
   </div>
@@ -254,7 +278,11 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
 
 <!-- FEATURE -->
 <section class="gap feature-sec">
-  <img class="feature-line" src="images/line.png" alt="">
+  <svg class="feature-line" viewBox="0 0 1920 808" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M-31 799.445C112.926 816.445 441.858 816.245 606.174 679.445"/>
+    <path d="M1923 0.445312C1857.7 33.4453 1679.22 95.9453 1487.72 81.9453C1248.35 64.4453 1040.95 148.945 983.98 264.945"/>
+    <ellipse class="dot" cx="983.98" cy="266.445" rx="4.4977" ry="4.5" fill="#111" stroke="none"/>
+  </svg>
   <div class="feature">
     <img class="fimg" src="images/main_section_img.png" alt="러스터글래스 립 틴트">
     <div class="ftext">
@@ -305,7 +333,7 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
     <p class="new-sub">지금 가장 인기있는 신상품을 만나보세요.</p>
     <div class="carousel">
       <div class="arrow left">‹</div>
-      <div class="cards">
+      <div class="cards-vp"><div class="cards-track"><div class="cards-page">
         <div class="card">
           <div class="cimg"><span class="newtag">NEW</span><img src="images/item1_6.png" alt=""></div>
           <h4>스킨피니쉬 컬러스트럭 블러쉬</h4>
@@ -342,9 +370,10 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
           <div class="cname">NC40</div>
           <div class="cbtns"><button class="b-fill">장바구니 담기</button><button class="b-out">메이크업 체험하기</button></div>
         </div>
-      </div>
+      </div></div></div>
       <div class="arrow right">›</div>
     </div>
+    <div class="dots"></div>
   </div>
 </section>
 
@@ -391,18 +420,19 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
     <h2>나에게 맞는 쉐이드 찾기</h2>
     <div class="ba">
       <div class="col">
-        <div class="face"><img src="images/before.png" alt="Before"></div>
+        <div class="face" data-face="before"><img class="lyr cur" src="images/before.png" alt="Before"><img class="lyr nxt" alt=""></div>
         <span class="col-label">Before</span>
       </div>
       <div class="ctrl"><i class="l"></i><i class="r"></i></div>
       <div class="col">
-        <div class="face"><img src="images/after.png" alt="After"></div>
+        <div class="face" data-face="after"><img class="lyr cur" src="images/after.png" alt="After"><img class="lyr nxt" alt=""></div>
         <span class="col-label">After</span>
       </div>
     </div>
     <div class="cap">붉은기 + 트러블 보정</div>
     <div class="desc">쿨 톤 컨실러를 사용해 붉은기를 시각적으로 완화하고, 웜 톤 트러블을<br>균형 있게 보정할 수 있습니다.</div>
     <button class="cbtn">쇼핑하기</button>
+    <div class="shade-dots"></div>
   </div>
 </section>
 
@@ -508,5 +538,147 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
   </div>
 </footer>
 
+<script>
+(function(){
+  var row=document.querySelector('.swatch-row');
+  if(!row || !('IntersectionObserver' in window)) return;
+  row.classList.add('anim-ready');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ row.classList.add('in'); obs.unobserve(e.target); } });
+  },{threshold:0.2});
+  obs.observe(row);
+})();
+
+(function(){
+  var vp=document.querySelector('.cards-vp');
+  if(!vp) return;
+  var track=vp.querySelector('.cards-track');
+  var firstPage=track.querySelector('.cards-page');
+  var PAGES=3;
+  for(var i=1;i<PAGES;i++){ track.appendChild(firstPage.cloneNode(true)); }
+  var idx=0;
+  var dotsWrap=document.querySelector('.new-sec .dots');
+  var dots=[];
+  for(var j=0;j<PAGES;j++){
+    var d=document.createElement('button');
+    d.className='pdot'+(j===0?' on':'');
+    (function(k){ d.addEventListener('click',function(){ go(k); }); })(j);
+    dotsWrap.appendChild(d); dots.push(d);
+  }
+  function render(){
+    track.style.transform='translateX(-'+(idx*100)+'%)';
+    dots.forEach(function(d,k){ d.classList.toggle('on',k===idx); });
+  }
+  function go(i){ idx=(i+PAGES)%PAGES; render(); }
+  var left=document.querySelector('.new-sec .arrow.left');
+  var right=document.querySelector('.new-sec .arrow.right');
+  if(left) left.addEventListener('click',function(){ go(idx-1); });
+  if(right) right.addEventListener('click',function(){ go(idx+1); });
+})();
+
+(function(){
+  var ba=document.querySelector('.shade .ba');
+  if(!ba) return;
+  var slides=[
+    {b:'images/before.png',a:'images/after.png',cap:'붉은기 + 트러블 보정',desc:'쿨 톤 컨실러를 사용해 붉은기를 시각적으로 완화하고, 웜 톤 트러블을<br>균형 있게 보정할 수 있습니다.'},
+    {b:'images/before_02.png',a:'images/after_02.png',cap:'다크 스팟 + 다크서클 커버',desc:'웜 톤 컨실러를 사용해 쿨 톤 색소 침착, 잡티 및 눈밑 다크서클을<br>자연스럽게 커버하세요.'},
+    {b:'images/before_03.png',a:'images/after_03.png',cap:'컨투어 + 하이라이트',desc:'파운데이션 쉐이드보다 1~2톤 어두운 컨실러로 컨투어링하고,<br>1~2톤 밝은 컨실러로 하이라이트를 더해 입체감을 살려보세요.'}
+  ];
+  var beforeFace=ba.querySelector('[data-face="before"]');
+  var afterFace=ba.querySelector('[data-face="after"]');
+  var capEl=document.querySelector('.shade .cap');
+  var descEl=document.querySelector('.shade .desc');
+  if(capEl) capEl.style.transition='opacity .35s ease';
+  if(descEl) descEl.style.transition='opacity .35s ease';
+  var idx=0, animating=false, DUR=850;
+  var dotsWrap=document.querySelector('.shade-dots');
+  var dots=[];
+  function updateDots(){ dots.forEach(function(d,k){ d.classList.toggle('on',k===idx); }); }
+  if(dotsWrap){
+    for(var dk=0;dk<slides.length;dk++){
+      var dd=document.createElement('button');
+      dd.className='sdot'+(dk===0?' on':'');
+      (function(m){ dd.addEventListener('click',function(){ go(m); }); })(dk);
+      dotsWrap.appendChild(dd); dots.push(dd);
+    }
+  }
+
+  function slideFace(face,newSrc,exitX,enterX){
+    var cur=face.querySelector('.cur'), nxt=face.querySelector('.nxt');
+    nxt.src=newSrc;
+    nxt.style.transition='none';
+    nxt.style.transform='translateX('+enterX+')';
+    nxt.style.opacity='1';
+    void nxt.offsetWidth;
+    cur.style.transition='transform '+DUR+'ms ease, opacity '+DUR+'ms ease';
+    cur.style.transform='translateX('+exitX+')';
+    cur.style.opacity='0';
+    nxt.style.transition='transform '+DUR+'ms ease';
+    nxt.style.transform='translateX(0)';
+    setTimeout(function(){
+      cur.src=newSrc;
+      cur.style.transition='none';
+      cur.style.transform='translateX(0)';
+      cur.style.opacity='1';
+      nxt.style.opacity='0';
+      nxt.style.transform='translateX(0)';
+    },DUR);
+  }
+
+  function go(n){
+    if(animating) return;
+    n=(n+slides.length)%slides.length;
+    if(n===idx) return;
+    animating=true;
+    var s=slides[n];
+    slideFace(beforeFace,s.b,'-105%','105%');
+    slideFace(afterFace,s.a,'105%','-105%');
+    if(capEl) capEl.style.opacity='0';
+    if(descEl) descEl.style.opacity='0';
+    setTimeout(function(){
+      if(capEl){ capEl.textContent=s.cap; capEl.style.opacity='1'; }
+      if(descEl){ descEl.innerHTML=s.desc; descEl.style.opacity='1'; }
+    },DUR/2);
+    idx=n;
+    updateDots();
+    setTimeout(function(){ animating=false; },DUR+60);
+  }
+
+  var l=ba.querySelector('.ctrl .l'), r=ba.querySelector('.ctrl .r');
+  if(l) l.addEventListener('click',function(){ go(idx-1); });
+  if(r) r.addEventListener('click',function(){ go(idx+1); });
+
+  // 드래그 / 스와이프
+  var startX=null;
+  ba.addEventListener('pointerdown',function(e){ startX=e.clientX; });
+  window.addEventListener('pointerup',function(e){
+    if(startX===null) return;
+    var dx=e.clientX-startX; startX=null;
+    if(Math.abs(dx)>50){ go(dx<0? idx+1 : idx-1); }
+  });
+  ba.querySelectorAll('img').forEach(function(im){ im.setAttribute('draggable','false'); });
+
+  var timer=null;
+  if('IntersectionObserver' in window){
+    var obsAuto=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ if(!timer) timer=setInterval(function(){ go(idx+1); },3800); }
+        else if(timer){ clearInterval(timer); timer=null; }
+      });
+    },{threshold:0.3});
+    obsAuto.observe(ba);
+  }
+})();
+
+(function(){
+  var crows=document.querySelectorAll('.collection .crow');
+  if(!crows.length || !('IntersectionObserver' in window)) return;
+  crows.forEach(function(c){ c.classList.add('ry'); });
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  },{threshold:0.2});
+  crows.forEach(function(c){ obs.observe(c); });
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M·A·C | 로그인</title>
+<style>
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-3Light.woff2') format('woff2');font-weight:300;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');font-weight:400;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');font-weight:500;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap;}
+@font-face{font-family:'Presentation';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Presentation',sans-serif;color:#111;background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;-webkit-user-select:none;user-select:none;caret-color:transparent;}
+input,textarea{-webkit-user-select:text;user-select:text;caret-color:auto;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+
+/* HEADER */
+.lg-header{border-bottom:1px solid #eee;height:70px;display:flex;align-items:center;justify-content:center;}
+.lg-header img{height:26px;width:auto;object-fit:contain;}
+
+/* MAIN */
+.lg-main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 24px;}
+.lg-card{width:100%;max-width:560px;border:1px solid #e6e6e6;}
+.lg-tabs{display:flex;border-bottom:1px solid #e6e6e6;}
+.lg-tabs button{flex:1;padding:22px 0;font-size:18px;font-weight:500;color:#aaa;position:relative;}
+.lg-tabs button.on{color:#111;font-weight:600;}
+.lg-tabs button.on::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:#111;}
+.lg-body{padding:44px 48px 48px;}
+.lg-social{display:flex;justify-content:center;gap:18px;margin-bottom:30px;}
+.lg-social a{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.lg-social .kakao{background:#FEE500;color:#3C1E1E;font-size:12px;}
+.lg-social .naver{background:#03C75A;color:#fff;font-size:22px;}
+.lg-or{display:flex;align-items:center;gap:16px;color:#999;font-size:14px;margin-bottom:28px;}
+.lg-or::before,.lg-or::after{content:"";flex:1;height:1px;background:#e6e6e6;}
+.lg-field{width:100%;border:1px solid #d8d8d8;border-radius:4px;padding:16px 18px;font-size:16px;color:#333;margin-bottom:16px;outline:none;}
+.lg-field::placeholder{color:#999;}
+.lg-pw{position:relative;}
+.lg-pw .lg-field{margin-bottom:0;padding-right:52px;}
+.lg-eye{position:absolute;top:50%;right:16px;transform:translateY(-50%);color:#888;display:flex;}
+.lg-find{display:inline-block;margin:18px 0 22px;font-size:15px;color:#111;text-decoration:underline;text-underline-offset:3px;}
+.lg-submit{width:100%;background:#111;color:#fff;font-size:17px;font-weight:600;padding:18px;border-radius:40px;}
+.lg-submit:hover{background:#000;}
+
+/* FOOTER */
+.lg-foot{height:34px;background:#000;}
+
+@media(max-width:600px){
+  .lg-body{padding:32px 24px 36px;}
+}
+</style>
+</head>
+<body>
+
+<header class="lg-header">
+  <a href="index.html"><img src="images/mac_logo.png" alt="M·A·C"></a>
+</header>
+
+<main class="lg-main">
+  <div class="lg-card">
+    <div class="lg-tabs">
+      <button class="on" data-tab="login">로그인</button>
+      <button data-tab="signup">계정 생성하기</button>
+    </div>
+    <div class="lg-body">
+      <div class="lg-social">
+        <a href="#" class="kakao">TALK</a>
+        <a href="#" class="naver">N</a>
+      </div>
+      <div class="lg-or">또는</div>
+      <input class="lg-field" type="email" placeholder="*이메일">
+      <div class="lg-pw">
+        <input class="lg-field" id="pw" type="password" placeholder="*비밀번호">
+        <button class="lg-eye" id="eye" type="button" aria-label="비밀번호 표시">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>
+        </button>
+      </div>
+      <input class="lg-field" id="pw2" type="password" placeholder="*비밀번호 확인" style="display:none;margin-top:16px;">
+      <a href="#" class="lg-find" id="findpw">비밀번호 찾기</a>
+      <button class="lg-submit" id="submit">로그인</button>
+    </div>
+  </div>
+</main>
+
+<footer class="lg-foot"></footer>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.lg-tabs button');
+  var pw2=document.getElementById('pw2');
+  var findpw=document.getElementById('findpw');
+  var submit=document.getElementById('submit');
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){ x.classList.remove('on'); });
+      t.classList.add('on');
+      if(t.dataset.tab==='signup'){
+        pw2.style.display='block';
+        findpw.style.display='none';
+        submit.textContent='계정 생성하기';
+      }else{
+        pw2.style.display='none';
+        findpw.style.display='inline-block';
+        submit.textContent='로그인';
+      }
+    });
+  });
+  var eye=document.getElementById('eye'), pw=document.getElementById('pw');
+  eye.addEventListener('click',function(){
+    pw.type = pw.type==='password' ? 'text' : 'password';
+  });
+})();
+</script>
+</body>
+</html>
