@@ -31,9 +31,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .lg-tabs button.on::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:#111;}
 .lg-body{padding:44px 48px 48px;}
 .lg-social{display:flex;justify-content:center;gap:18px;margin-bottom:30px;}
-.lg-social a{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;}
-.lg-social .kakao{background:#FEE500;color:#3C1E1E;font-size:12px;}
-.lg-social .naver{background:#03C75A;color:#fff;font-size:22px;}
+.lg-social a{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.lg-social .kakao{background:#FEE500;}
+.lg-social .naver{background:#03C75A;}
+.lg-social a img{width:30px;height:30px;object-fit:contain;}
 .lg-or{display:flex;align-items:center;gap:16px;color:#999;font-size:14px;margin-bottom:28px;}
 .lg-or::before,.lg-or::after{content:"";flex:1;height:1px;background:#e6e6e6;}
 .lg-field{width:100%;border:1px solid #d8d8d8;border-radius:4px;padding:16px 18px;font-size:16px;color:#333;margin-bottom:16px;outline:none;}
@@ -48,8 +49,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 /* FOOTER */
 .lg-foot{height:34px;background:#000;}
 
+@media(max-width:768px){
+  .lg-main{padding:40px 20px;}
+  .lg-tabs button{font-size:16px;padding:18px 0;}
+}
 @media(max-width:600px){
-  .lg-body{padding:32px 24px 36px;}
+  .lg-header{height:58px;}
+  .lg-header img{height:22px;}
+  .lg-main{padding:28px 16px;}
+  .lg-body{padding:28px 20px 32px;}
+  .lg-social a,.lg-social a img{width:46px;height:46px;}
+  .lg-field{font-size:15px;padding:14px 16px;}
+  .lg-submit{font-size:16px;padding:16px;}
+  .lg-tabs button{font-size:15px;padding:16px 0;}
 }
 </style>
 </head>
@@ -67,8 +79,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     </div>
     <div class="lg-body">
       <div class="lg-social">
-        <a href="#" class="kakao">TALK</a>
-        <a href="#" class="naver">N</a>
+        <a href="#" class="kakao"><img src="images/sub_login_talk.png" alt="카카오 로그인"></a>
+        <a href="#" class="naver"><img src="images/sub_login_naver.png" alt="네이버 로그인"></a>
       </div>
       <div class="lg-or">또는</div>
       <input class="lg-field" type="email" placeholder="*이메일">

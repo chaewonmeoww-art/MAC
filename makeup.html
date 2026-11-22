@@ -32,8 +32,14 @@ header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid
 .nav ul{display:flex;gap:52px;list-style:none;font-size:20px;font-weight:600;}
 .nav ul a:hover{opacity:.6;}
 .nav ul a.on{border-bottom:2px solid #111;padding-bottom:4px;}
+.nav ul li.m-only{display:none;}
 .nav-icons{display:flex;gap:18px;align-items:center;}
 .nav-icons img{width:22px;height:22px;object-fit:contain;}
+.nav-toggle{display:none;width:28px;height:22px;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;padding:0;}
+.nav-toggle span{display:block;height:2px;width:28px;background:#111;transition:transform .3s ease,opacity .3s ease;}
+header.open .nav-toggle span:nth-child(1){transform:translateY(10px) rotate(45deg);}
+header.open .nav-toggle span:nth-child(2){opacity:0;}
+header.open .nav-toggle span:nth-child(3){transform:translateY(-10px) rotate(-45deg);}
 
 /* ===== HERO ===== */
 .mk-hero{position:relative;line-height:0;}
@@ -45,8 +51,11 @@ header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid
 .mk-pick .pk-name{font-size:24px;font-weight:600;margin:6px 0 16px;}
 .mk-pick .pk-btn{background:#ffffff;color:#111;font-size:16px;font-weight:600;padding:11px 22px;border-radius:20px;}
 
+.mk-mobile-hero{display:none;}
+
 /* ===== CATEGORY TABS ===== */
 .mk-cats{background:#111;}
+.mk-cat-toggle,.mk-cat-label{display:none;}
 .mk-cats ul{display:flex;justify-content:center;align-items:center;gap:56px;height:66px;list-style:none;}
 .mk-cats a{color:#fff;font-size:20px;font-weight:600;opacity:.75;padding:6px 0;}
 .mk-cats a:hover{opacity:1;}
@@ -118,18 +127,161 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
 .foot-legal p{font-size:16px;font-weight:300;color:#dcdcdc;line-height:1.6;margin-bottom:18px;}
 
 @media(max-width:1280px){
-  .wrap,.nav{padding-left:80px;padding-right:80px;}
-  .mk-maximal .mx-text{left:80px;}
+  .wrap,.nav{padding-left:48px;padding-right:48px;}
+  .mk-maximal .mx-text{left:48px;}
+  .mk-cats ul{gap:32px;}
+  .mk-cats a{font-size:18px;}
+  .mk-pick .who,.mk-pick .pk-name{font-size:20px;}
 }
 @media(max-width:900px){
-  .nav ul{display:none;}
+  .nav-toggle{display:flex;}
+  .nav ul{display:flex;flex-direction:column;gap:0;position:absolute;top:64px;left:0;right:0;background:#fff;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:6px 24px 16px;transform:translateY(-160%);opacity:0;pointer-events:none;transition:transform .35s ease,opacity .3s ease;z-index:90;box-shadow:0 12px 24px rgba(0,0,0,.06);margin:0;}
+  header.open .nav ul{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .nav ul li{width:100%;padding:15px 4px;border-bottom:1px solid #f2f2f2;}
+  .nav ul li:last-child{border-bottom:none;}
+  .nav ul a.on{border-bottom:none;padding-bottom:0;}
+  .nav ul li.m-only{display:block;}
+  .nav-icons a,.nav-icons>img{display:none;}
   .wrap,.nav{padding-left:24px;padding-right:24px;}
   .mk-grid{grid-template-columns:repeat(2,1fr);}
   .mk-sig-grid{grid-template-columns:1fr;}
-  .mk-maximal .mx-text{left:24px;max-width:60%;}
+  .mk-maximal .mx-text{left:24px;max-width:62%;}
+  .mk-maximal .mx-text h3{font-size:26px;}
+  .mk-maximal .mx-text .tag{font-size:13px;margin-bottom:10px;}
+  .mk-maximal .mx-text p{font-size:14px;margin-bottom:16px;}
+  .mk-cats ul{gap:22px;overflow-x:auto;justify-content:flex-start;padding:0 24px;}
+  .mk-cats a{font-size:16px;white-space:nowrap;}
+  .mk-search{margin:130px 0 40px;}
+  .mk-pick .who,.mk-pick .pk-name{font-size:18px;}
+  .mk-pick .pk-btn{font-size:14px;padding:9px 16px;}
+}
+@media(max-width:600px){
+  .nav{padding-left:28px;padding-right:28px;}
+  .logo img{height:16px;}
+  .mk-grid{grid-template-columns:1fr;gap:24px;}
+  .mk-search{margin:80px 0 32px;}
+  .mk-search .box{width:100%;max-width:340px;}
+  .mk-pick.left{left:5%;} .mk-pick.right{right:5%;}
+  .mk-pick .who,.mk-pick .pk-name{font-size:14px;margin:2px 0 8px;}
+  .mk-pick .pk-btn{font-size:12px;padding:7px 12px;}
+  .mk-maximal .mx-text h3{font-size:20px;}
+  .mk-maximal .mx-text p{font-size:12px;}
+  .mk-maximal .mx-text .mx-btn{font-size:14px;padding:10px 22px;}
+  .mk-sig h2{font-size:24px;}
+  .foot-top{flex-direction:column;gap:22px;} .fcol{flex:1 1 auto;}
+  .legal-links{gap:14px;font-size:13px;} .foot-legal p{font-size:13px;}
+}
+/* Mobile campaign and product layout */
+@media(max-width:900px){
+  .mk-hero{display:none;}
+  .mk-mobile-hero{display:block;position:relative;background:#7abacc;aspect-ratio:1.2;overflow:hidden;line-height:0;}
+  .mk-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .65s ease,visibility .65s;}
+  .mk-slide.is-active{opacity:1;visibility:visible;z-index:1;}
+  .mk-slide img{position:absolute;width:100%;height:100%;object-fit:cover;max-width:none;}
+  .mk-slide:first-child img{width:105%;height:105%;left:-2.5%;top:-2.5%;}
+  .mk-hero-controls{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:2;display:flex;align-items:center;gap:8px;line-height:1;}
+  .mk-hero-controls button{width:12px;height:28px;background:transparent;display:grid;place-items:center;}
+  .mk-hero-dot::after{content:'';width:8px;height:8px;background:rgba(255,255,255,.45);border-radius:50%;}
+  .mk-hero-dot[aria-pressed="true"]::after{background:#fff;}
+  .mk-grid{gap:16px;grid-template-columns:repeat(2,minmax(0,1fr));scroll-margin-top:90px;}
+  .pcard{min-width:0;padding:28px 14px 18px;}
+  .pcard .pimg img{max-width:100%;}
+  .pcard .psw{flex-wrap:wrap;}
+  .mk-search{margin:48px 0 28px;gap:10px;}
+  .mk-search .box{flex:1;min-width:0;max-width:420px;height:52px;padding:0 14px;gap:10px;}
+  .mk-search .box input{min-width:0;width:100%;font-size:16px;}
+  .mk-search .filter{flex:0 0 52px;width:52px;height:52px;}
+  .mk-cats ul{height:56px;gap:24px;}
+  .mk-cats a.on::after{height:2px;top:calc(100% + 6px);border:0;}
+  .mk-maximal,.mk-sig{margin-top:72px;}
+  .mk-maximal .mx-text{position:static;transform:none;max-width:none;padding:28px 24px 32px;}
+  .mk-maximal .mx-text p{font-size:16px;}
+  .mk-sig-grid{gap:36px;}
+  .sig-card img{height:auto;}
+  .sig-card p{min-height:0;font-size:16px;}
+  footer{margin-top:80px;}
+}
+@media(max-width:600px){
+  .wrap{padding-left:16px;padding-right:16px;}
+  .mk-grid{gap:12px;}
+  .pcard{border-color:#e2e2e2;border-radius:10px;padding:24px 10px 14px;}
+  .pcard .pimg{height:150px;margin-bottom:14px;}
+  .pcard .pimg img{max-height:150px;}
+  .pcard .pname{font-size:15px;min-height:41px;}
+  .pcard .pen{font-size:12px;min-height:50px;overflow-wrap:anywhere;}
+  .pcard .pprice{font-size:16px;}
+  .pcard .psw{gap:5px;}
+  .pcard .psw i{width:17px;height:17px;}
+  .pcard .pshade{font-size:14px;}
+  .pcard .pbtns{flex-direction:column;gap:7px;}
+  .pcard .pbtns button{font-size:13px;min-height:42px;padding:10px 3px;}
+  .pcard .newtag{top:8px;right:8px;font-size:10px;padding:2px 8px;}
+  .mk-search{margin:32px 0 24px;}
+  .mk-search .box img{width:20px;height:20px;}
+  .mk-search .box input{font-size:14px;}
   .mk-maximal .mx-text h3{font-size:24px;}
-  .mk-maximal .mx-text p{font-size:13px;}
-  .mk-cats ul{gap:24px;overflow-x:auto;justify-content:flex-start;}
+  .mk-maximal .mx-text p{font-size:15px;}
+}
+@media(prefers-reduced-motion:reduce){.mk-slide{transition:none;}}
+@media(max-width:900px){
+  .mk-cats{background:#fff;border-bottom:1px solid #e6e6e6;}
+  .mk-cat-toggle{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:0 20px;background:#fff;color:#111;text-align:left;}
+  .mk-cat-heading{font-size:14px;color:#777;}
+  .mk-cat-current{margin-left:auto;font-size:16px;font-weight:600;}
+  .mk-cat-chevron{width:8px;height:8px;border:solid #111;border-width:0 1.5px 1.5px 0;transform:rotate(45deg);margin:0 3px 5px 4px;}
+  .mk-cats.is-open .mk-cat-chevron{transform:rotate(225deg);margin-bottom:-3px;}
+  .mk-cats ul{display:none;height:auto;overflow:visible;padding:0 16px 16px;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));}
+  .mk-cats.is-open ul{display:grid;}
+  .mk-cats li{min-width:0;}
+  .mk-cats a{display:flex;align-items:flex-start;justify-content:center;flex-direction:column;gap:3px;min-height:64px;padding:10px 12px;border:1px solid #e5e5e5;border-radius:8px;opacity:1;white-space:normal;color:#111;font-size:15px;font-weight:500;}
+  .mk-cats .mk-cat-label{display:block;}
+  .mk-cats .mk-cat-en{font-size:11px;line-height:1.3;color:#777;}
+  .mk-cats a.on{border-color:#111;background:#f5f5f5;font-weight:700;}
+  .mk-cats a.on::after{display:none;}
+  .mk-cat-toggle:focus-visible,.mk-cats a:focus-visible{outline:2px solid #111;outline-offset:-3px;}
+}
+@media(max-width:900px){
+  .mk-hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:40px;height:48px;background:transparent;display:grid;place-items:center;}
+  .mk-hero-arrow::before{content:'';width:12px;height:12px;border:solid #fff;border-width:0 2px 2px 0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));}
+  .mk-hero-prev{left:4px;}
+  .mk-hero-next{right:4px;}
+  .mk-hero-prev::before{transform:rotate(135deg);}
+  .mk-hero-next::before{transform:rotate(-45deg);}
+  .mk-hero-arrow:focus-visible{outline:2px solid #fff;outline-offset:-4px;}
+}
+@media(max-width:900px){
+  .mk-cats{background:#111;border-bottom-color:#333;}
+  .mk-cat-toggle{background:#111;color:#fff;}
+  .mk-cat-heading{color:#aaa;}
+  .mk-cat-chevron{border-color:#fff;}
+  .mk-cats a{background:#111;border-color:#444;color:#fff;}
+  .mk-cats .mk-cat-label{display:none;}
+  .mk-cats .mk-cat-en{font-size:14px;line-height:1.4;color:#fff;}
+  .mk-cats a.on{border-color:#fff;background:#292929;}
+  .mk-cat-toggle:focus-visible,.mk-cats a:focus-visible{outline-color:#fff;}
+}
+@media(max-width:900px){
+  .mk-cats .mk-cat-en{order:0;}
+  .mk-cats .mk-cat-label{display:block;order:1;font-size:12px;font-weight:400;line-height:1.4;color:#aaa;}
+}
+@media(max-width:900px){
+  .mk-cat-toggle{gap:10px;min-height:72px;padding:10px 16px;cursor:pointer;}
+  .mk-cat-heading{color:#ddd;font-size:13px;}
+  .mk-cat-current{font-size:14px;}
+  .mk-cat-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 12px;border-radius:6px;background:#fff;color:#111;font-size:13px;font-weight:600;white-space:nowrap;}
+  .mk-cat-action .mk-cat-chevron{border-color:#111;width:7px;height:7px;margin-left:0;margin-right:0;}
+  .mk-cats a{position:relative;padding-right:28px;cursor:pointer;}
+  .mk-cats a:active{background:#333;}
+  .mk-cats a.on{background:#fff;border-color:#fff;color:#111;}
+  .mk-cats a.on .mk-cat-en{color:#111;}
+  .mk-cats a.on .mk-cat-label{color:#666;}
+  .mk-cats a.on::after{display:block;content:'';position:absolute;left:auto;top:50%;right:12px;width:6px;height:11px;background:transparent;border:solid #111;border-width:0 2px 2px 0;transform:translateY(-65%) rotate(45deg);}
+}
+@media(max-width:900px){
+  .mk-cat-toggle{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:24px;row-gap:4px;padding:16px 20px;min-height:88px;}
+  .mk-cat-heading{grid-column:1;grid-row:1;font-size:12px;line-height:1.4;color:#aaa;}
+  .mk-cat-current{grid-column:1;grid-row:2;margin:0;font-size:17px;font-weight:600;line-height:1.4;overflow-wrap:anywhere;}
+  .mk-cat-action{grid-column:2;grid-row:1 / 3;min-height:42px;padding:0 14px;align-self:center;}
 }
 </style>
 </head>
@@ -146,10 +298,13 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
       <li><a class="on" href="makeup.html">메이크업</a></li>
       <li><a href="#">스킨케어</a></li>
       <li><a href="#">M.A.C.Zine</a></li>
+      <li class="m-only"><a href="login.html">로그인</a></li>
+      <li class="m-only"><a href="#">장바구니</a></li>
     </ul>
     <div class="nav-icons">
       <a href="login.html"><img src="images/login.png" alt="login"></a>
       <img src="images/shopping basket.png" alt="cart">
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -169,16 +324,36 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
   </div>
 </section>
 
+<!-- MOBILE HERO -->
+<section class="mk-mobile-hero" aria-label="파우더 키스 캠페인" aria-roledescription="캐러셀">
+  <a class="mk-slide is-active" href="#makeupProducts" aria-label="ELLA의 원픽, 파우더 키스 헤이즈 매트 립스틱 24가지 쉐이드 쇼핑하기">
+    <img src="images/makeup_mobile_ella.png" alt="ELLA의 POWDER KISS 캠페인" fetchpriority="high">
+  </a>
+  <a class="mk-slide" href="#makeupProducts" aria-label="DOJA CAT의 원픽, 파우더 키스 립 + 치크 무스 28가지 쉐이드 쇼핑하기" aria-hidden="true" tabindex="-1">
+    <img src="images/makeup_mobile_doja.png" alt="DOJA CAT의 POWDER KISS 캠페인">
+  </a>
+  <button class="mk-hero-arrow mk-hero-prev" type="button" aria-label="이전 캠페인"></button>
+  <button class="mk-hero-arrow mk-hero-next" type="button" aria-label="다음 캠페인"></button>
+  <div class="mk-hero-controls">
+    <button class="mk-hero-dot" aria-label="ELLA 캠페인 보기" aria-pressed="true"></button>
+    <button class="mk-hero-dot" aria-label="DOJA CAT 캠페인 보기" aria-pressed="false"></button>
+  </div>
+</section>
 <!-- CATEGORY TABS -->
-<nav class="mk-cats">
-  <ul>
-    <li><a class="on" href="#">LIPSTICK</a></li>
-    <li><a href="#">LIQUID LIP</a></li>
-    <li><a href="#">LIPGLASS</a></li>
-    <li><a href="#">LIP PENCIL</a></li>
-    <li><a href="#">Mini M·A·C</a></li>
-    <li><a href="#">Lip Palette &amp; Kit</a></li>
-    <li><a href="#">Lip Care &amp; Primer</a></li>
+<nav class="mk-cats" aria-label="제품 카테고리">
+  <button class="mk-cat-toggle" type="button" aria-expanded="false" aria-controls="mkCategoryList">
+    <span class="mk-cat-heading">카테고리 선택</span>
+    <span class="mk-cat-current">LIPSTICK</span>
+    <span class="mk-cat-action">전체 보기<span class="mk-cat-chevron" aria-hidden="true"></span></span>
+  </button>
+  <ul id="mkCategoryList">
+    <li><a class="on" href="#"><span class="mk-cat-label">립스틱</span><span class="mk-cat-en">LIPSTICK</span></a></li>
+    <li><a href="#"><span class="mk-cat-label">리퀴드 립</span><span class="mk-cat-en">LIQUID LIP</span></a></li>
+    <li><a href="#"><span class="mk-cat-label">립글라스</span><span class="mk-cat-en">LIPGLASS</span></a></li>
+    <li><a href="#"><span class="mk-cat-label">립 펜슬</span><span class="mk-cat-en">LIP PENCIL</span></a></li>
+    <li><a href="#"><span class="mk-cat-label">미니 맥</span><span class="mk-cat-en">Mini M·A·C</span></a></li>
+    <li><a href="#"><span class="mk-cat-label">립 팔레트 & 키트</span><span class="mk-cat-en">Lip Palette &amp; Kit</span></a></li>
+    <li><a href="#"><span class="mk-cat-label">립 케어 & 프라이머</span><span class="mk-cat-en">Lip Care &amp; Primer</span></a></li>
   </ul>
 </nav>
 
@@ -193,7 +368,7 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
   </div>
 
   <!-- PRODUCT GRID -->
-  <div class="mk-grid">
+  <div class="mk-grid" id="makeupProducts">
 
     <div class="pcard">
       <div class="pimg"><img src="images/sub_item01.png" alt=""></div>
@@ -422,5 +597,77 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
   </div>
 </footer>
 
+<script>
+(function(){
+  var toggle=document.getElementById('navToggle');
+  var header=document.querySelector('header');
+  if(toggle&&header){
+    toggle.addEventListener('click',function(){ header.classList.toggle('open'); });
+    header.querySelectorAll('.nav ul a').forEach(function(a){
+      a.addEventListener('click',function(){ header.classList.remove('open'); });
+    });
+  }
+})();
+(function(){
+  var hero=document.querySelector('.mk-mobile-hero');
+  var slides=hero.querySelectorAll('.mk-slide');
+  var dots=hero.querySelectorAll('.mk-hero-dot');
+  var mobile=window.matchMedia('(max-width:900px)');
+  var reduced=window.matchMedia('(prefers-reduced-motion:reduce)');
+  var index=0,timer=null,paused=reduced.matches;
+  function show(next){
+    index=(next+slides.length)%slides.length;
+    slides.forEach(function(slide,i){
+      slide.classList.toggle('is-active',i===index);
+      slide.setAttribute('aria-hidden',String(i!==index));
+      slide.tabIndex=i===index?0:-1;
+      dots[i].setAttribute('aria-pressed',String(i===index));
+    });
+  }
+  function sync(){
+    clearInterval(timer);timer=null;
+    if(mobile.matches&&!paused&&!document.hidden){
+      timer=setInterval(function(){show(index+1);},4500);
+    }
+  }
+  dots.forEach(function(dot,i){dot.addEventListener('click',function(){show(i);sync();});});
+  hero.querySelector('.mk-hero-prev').addEventListener('click',function(){show(index-1);sync();});
+  hero.querySelector('.mk-hero-next').addEventListener('click',function(){show(index+1);sync();});
+  document.addEventListener('visibilitychange',sync);
+  mobile.addEventListener('change',sync);
+  reduced.addEventListener('change',function(){paused=reduced.matches;sync();});
+  var startX=null;
+  hero.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;},{passive:true});
+  hero.addEventListener('touchend',function(e){
+    if(startX===null)return;
+    var dx=e.changedTouches[0].clientX-startX;startX=null;
+    if(Math.abs(dx)>40){show(index+(dx<0?1:-1));sync();}
+  },{passive:true});
+  sync();
+})();
+(function(){
+  var menu=document.querySelector('.mk-cats');
+  var toggle=menu.querySelector('.mk-cat-toggle');
+  var links=menu.querySelectorAll('a');
+  function close(){menu.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');menu.querySelector('.mk-cat-action').firstChild.textContent='전체 보기';}
+  toggle.addEventListener('click',function(){
+    var open=menu.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(open));menu.querySelector('.mk-cat-action').firstChild.textContent=open?'접기':'전체 보기';
+  });
+  links.forEach(function(link){
+    link.addEventListener('click',function(e){
+      e.preventDefault();
+      links.forEach(function(item){item.classList.remove('on');item.removeAttribute('aria-current');});
+      link.classList.add('on');link.setAttribute('aria-current','true');
+      menu.querySelector('.mk-cat-current').textContent=link.querySelector('.mk-cat-en').textContent;
+      close();
+      if(window.matchMedia('(max-width:900px)').matches)toggle.focus({preventScroll:true});
+    });
+  });
+  menu.querySelector('a.on').setAttribute('aria-current','true');
+  document.addEventListener('click',function(e){if(!menu.contains(e.target))close();});
+  menu.addEventListener('keydown',function(e){if(e.key==='Escape'){close();toggle.focus();}});
+  window.matchMedia('(max-width:900px)').addEventListener('change',close);
+})();
+</script>
 </body>
 </html>
