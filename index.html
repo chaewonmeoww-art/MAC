@@ -313,7 +313,7 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
   .arrow{display:none;}
   .foot-top{flex-wrap:wrap;gap:34px 20px;} .fcol{flex:1 1 40%;}
   .shade .cap{font-size:30px;} .shade .desc{font-size:20px;}
-  .marquee-track img{height:60px;}
+  .marquee-track img{height:32px;}
   .watermark span{font-size:220px;}
 }
 @media(max-width:600px){
@@ -450,6 +450,26 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
   .collection p{max-width:320px;margin:0 auto 22px;font-size:15px;line-height:1.7;color:#666;word-break:keep-all;overflow-wrap:break-word;text-wrap:balance;}
   .collection .nc-btn{min-width:176px;min-height:44px;padding:11px 22px;font-size:15px;line-height:1.4;}
 }
+@media(max-width:900px){
+  .services .lead{margin-bottom:24px;}
+}
+.svc-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+.svc-field{min-width:0;cursor:pointer;}
+.svc-field select{appearance:none;-webkit-appearance:none;min-width:0;width:100%;flex:1;border:0;background:transparent;font:inherit;font-size:16px;color:#111;outline:none;cursor:pointer;border-radius:0;}
+.svc-field select:disabled{color:#999;cursor:default;}
+.svc-field:focus-within{outline:2px solid #111;outline-offset:2px;}
+.svc-field .chev{flex-shrink:0;pointer-events:none;}
+.svc-store-details{padding:16px;border:1px solid #e6e6e6;border-radius:10px;margin:-10px 0 16px;}
+.svc-store-details[hidden],.svc-store-links a[hidden]{display:none;}
+.svc-store-details strong{display:block;font-size:17px;font-weight:600;word-break:keep-all;}
+.svc-store-details p{font-size:14px;color:#666;margin:6px 0 12px;}
+.svc-store-links{display:flex;flex-wrap:wrap;gap:10px 16px;font-size:14px;}
+.svc-store-links a{text-decoration:underline;text-underline-offset:3px;}
+.svc-store-help{font-size:14px;color:#666;line-height:1.5;margin:-10px 0 18px;}
+.svc-next[aria-disabled="true"]{background:#ddd;color:#888;cursor:default;}
+.svc-store-source{font-size:12px;color:#777;line-height:1.7;margin-top:12px;}
+.svc-store-source a{text-decoration:underline;text-underline-offset:2px;}
+@media(max-width:900px){.svc-two{gap:12px;}.svc-field{padding:14px 12px;gap:8px;}}
 </style>
 </head>
 <body>
@@ -684,10 +704,30 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
         </div>
         <div class="svc-h">매장 선택하기</div>
         <div class="svc-two">
-          <div class="svc-field"><img class="fic" src="images/icon_02.png" alt=""><span>지역 선택</span><svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
-          <div class="svc-field"><img class="fic" src="images/icon_05.png" alt=""><span>매장 선택</span><svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+          <label class="svc-field" for="svcRegion">
+            <img class="fic" src="images/icon_02.png" alt="">
+            <span class="svc-sr-only">지역 선택</span>
+            <select id="svcRegion"><option value="">지역 선택</option></select>
+            <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </label>
+          <label class="svc-field" for="svcStore">
+            <img class="fic" src="images/icon_05.png" alt="">
+            <span class="svc-sr-only">매장 선택</span>
+            <select id="svcStore" disabled><option value="">지역을 먼저 선택해주세요</option></select>
+            <svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </label>
         </div>
-        <button class="svc-next">다음 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        <div class="svc-store-details" id="svcStoreDetails" aria-live="polite" hidden>
+          <strong id="svcStoreName"></strong>
+          <p id="svcStoreLocation"></p>
+          <div class="svc-store-links">
+            <a id="svcStoreMap" target="_blank" rel="noopener noreferrer">지도에서 위치 보기</a>
+            <a id="svcStorePhone" hidden></a>
+          </div>
+        </div>
+        <p class="svc-store-help" id="svcStoreHelp" aria-live="polite">지역을 선택하면 해당 지역의 맥 매장을 볼 수 있어요.</p>
+        <button class="svc-next" id="svcStoreGuide" type="button" disabled aria-disabled="true">다음 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        <p class="svc-store-source">공식 안내에서 확인한 매장 목록입니다. <a href="https://www.maccosmetics.co.kr/stores" target="_blank" rel="noopener noreferrer">전체 매장 찾기</a><br>메이크업 서비스와 예약 가능 여부는 선택한 매장에 확인해주세요.</p>
         <div class="svc-note">1. 메이크업 서비스 예약 후 사전 연락없이 미 방문시 (3회 이상)<br>&nbsp;&nbsp;&nbsp;NO SHOW 고객으로 처리되어 추후 메이크업 서비스 이용이 불가합니다.<br>2. 예약 지정 시간 방문하지 않을 시 10분 이후 자동 예약 취소될 수 있습니다..</div>
       </div>
     </div>
@@ -752,6 +792,7 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
   </div>
 </footer>
 
+<script src="data/mac-stores.js"></script>
 <script>
 (function(){
   var toggle=document.getElementById('navToggle');
@@ -931,6 +972,47 @@ footer{background:#000000;color:#d6d6d6;padding:80px 0 70px;margin-top:200px;}
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
   },{threshold:0.2});
   crows.forEach(function(c){ obs.observe(c); });
+})();
+(function(){
+  var directory=window.MAC_STORE_DIRECTORY;
+  var region=document.getElementById('svcRegion');
+  var select=document.getElementById('svcStore');
+  var details=document.getElementById('svcStoreDetails');
+  var guide=document.getElementById('svcStoreGuide');
+  var help=document.getElementById('svcStoreHelp');
+  if(!directory||!region||!select)return;
+  var stores=directory.stores;
+  Array.from(new Set(stores.map(function(store){return store.region;}))).forEach(function(name){
+    var count=stores.filter(function(store){return store.region===name;}).length;
+    region.add(new Option(name+' ('+count+'개 매장)',name));
+  });
+  function reset(){
+    details.hidden=true;guide.disabled=true;guide.setAttribute('aria-disabled','true');
+  }
+  region.addEventListener('change',function(){
+    reset();select.replaceChildren();
+    var matches=stores.filter(function(store){return store.region===region.value;});
+    select.add(new Option(region.value?'매장 선택':'지역을 먼저 선택해주세요',''));
+    matches.forEach(function(store){select.add(new Option(store.name,store.id));});
+    select.disabled=!region.value;
+    help.textContent=region.value?region.value+' 지역 '+matches.length+'개 매장 중 방문할 매장을 선택해주세요.':'지역을 선택하면 해당 지역의 맥 매장을 볼 수 있어요.';
+  });
+  select.addEventListener('change',function(){
+    reset();
+    var store=stores.find(function(item){return item.id===select.value&&item.region===region.value;});
+    if(!store){help.textContent='방문할 매장을 선택해주세요.';return;}
+    document.getElementById('svcStoreName').textContent='M·A·C '+store.name;
+    document.getElementById('svcStoreLocation').textContent=store.location;
+    document.getElementById('svcStoreMap').href='https://map.naver.com/p/search/'+encodeURIComponent('맥 '+store.name);
+    var phone=document.getElementById('svcStorePhone');
+    phone.hidden=!store.phone;
+    if(store.phone){phone.textContent=store.phone;phone.href='tel:'+store.phone;}
+    else{phone.textContent='';phone.removeAttribute('href');}
+    details.hidden=false;
+    guide.disabled=false;guide.setAttribute('aria-disabled','false');
+    help.textContent='선택한 매장의 위치와 연락처를 확인할 수 있어요.';
+  });
+  guide.addEventListener('click',function(e){if(guide.getAttribute('aria-disabled')==='true')e.preventDefault();});
 })();
 </script>
 </body>
